@@ -1,0 +1,14 @@
+version: "3.8"
+
+services:
+  localstack:
+    container_name: localstack_main
+    image: localstack/localstack:4.4.0
+    ports:
+      - "127.0.0.1:4566:4566"            # 共通エッジポート
+      - "127.0.0.1:4510-4559:4510-4559"  # 外部サービス用ポート
+    environment:
+      - AWS_DEFAULT_REGION=us-east-1
+    volumes:
+      - "./localstack:/var/lib/localstack"
+      - "/var/run/docker.sock:/var/run/docker.sock"
